@@ -3,3 +3,13 @@
 Для запуска приложения необходимо использовать live-server
 ![изображение live-server](image.png)
 Live-server является расширением VSCode
+
+## Вариант 2
+
+## Запуск:
+
+npm run dev
+
+## Сборка:
+
+npm run build
