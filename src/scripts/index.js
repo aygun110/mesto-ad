@@ -1,3 +1,8 @@
+import {
+  enableValidation,
+  clearValidation,
+} from "./components/validation.js";
+
 import { createCardElement } from "./components/card.js";
 import {
   openModalWindow,
@@ -49,6 +54,15 @@ const profileDescription = document.querySelector(".profile__description");
 const profileAvatar = document.querySelector(".profile__image");
 
 let currentUserId;
+
+const validationConfig = {
+  formSelector: ".popup__form",
+  inputSelector: ".popup__input",
+  submitButtonSelector: ".popup__button",
+  inactiveButtonClass: "popup__button_disabled",
+  inputErrorClass: "popup__input_type_error",
+  errorClass: "popup__error_visible",
+};
 
 const renderLoading = (button, isLoading, loadingText, defaultText) => {
   button.textContent = isLoading ? loadingText : defaultText;
@@ -201,6 +215,7 @@ const handleAvatarFormSubmit = (evt) => {
     .then((userData) => {
       profileAvatar.style.backgroundImage = `url(${userData.avatar})`;
       closeModalWindow(avatarFormModalWindow);
+      avatarForm.reset();
     })
     .catch((err) => {
       console.log(err);
@@ -241,16 +256,19 @@ logo.addEventListener("click", handleLogoClick);
 openProfileFormButton.addEventListener("click", () => {
   profileTitleInput.value = profileTitle.textContent;
   profileDescriptionInput.value = profileDescription.textContent;
+  clearValidation(profileForm, validationConfig);
   openModalWindow(profileFormModalWindow);
 });
 
 profileAvatar.addEventListener("click", () => {
   avatarForm.reset();
+  clearValidation(avatarForm, validationConfig);
   openModalWindow(avatarFormModalWindow);
 });
 
 openCardFormButton.addEventListener("click", () => {
   cardForm.reset();
+  clearValidation(cardForm, validationConfig);
   openModalWindow(cardFormModalWindow);
 });
 
@@ -274,3 +292,5 @@ const allPopups = document.querySelectorAll(".popup");
 allPopups.forEach((popup) => {
   setCloseModalWindowEventListeners(popup);
 });
+
+enableValidation(validationConfig);
