@@ -4,12 +4,16 @@
 ![изображение live-server](image.png)
 Live-server является расширением VSCode
 
-## Вариант 2
+# Mesto
 
-## Запуск:
+## Ссылка на проект
+
+https://USERNAME.github.io/mesto-production/
+
+## Запуск проекта
 
 npm run dev
 
-## Сборка:
+## Сборка проекта
 
 npm run build
