@@ -8,7 +8,7 @@ Live-server является расширением VSCode
 
 ## Ссылка на проект
 
-[https://USERNAME.github.io/mesto-production/](https://github.com/aygun110/mesto-ad.git)
+[[https://USERNAME.github.io/mesto-production/](https://github.com/aygun110/mesto-ad.git)](https://github.com/aygun110/mesto-ad.git)
 
 ## Запуск проекта
 
