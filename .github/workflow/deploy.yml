@@ -31,7 +31,7 @@ jobs:
         with:
           personal_token: ${{ secrets.PUBLIC_PAGES_TOKEN }}
           external_repository: ${{ secrets.PUBLIC_PAGES_REPO }}
-          publish_dir: ./
+          publish_dir: ./dist
           publish_branch: ${{ secrets.PUBLIC_PAGES_BRANCH || 'main' }}
           user_name: 'github-actions[bot]'
           user_email: 'github-actions[bot]@users.noreply.github.com'

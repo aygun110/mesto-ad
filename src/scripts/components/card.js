@@ -1,5 +1,18 @@
 const cardTemplate = document.querySelector("#card-template").content;
 
+export const isCardLiked = (likeButton) => {
+  return likeButton.classList.contains("card__like-button_is-active");
+};
+
+export const updateLikeView = (cardData, likeButton, likeCount) => {
+  likeButton.classList.toggle("card__like-button_is-active");
+  likeCount.textContent = cardData.likes.length;
+};
+
+export const deleteCardElement = (cardElement) => {
+  cardElement.remove();
+};
+
 export const createCardElement = (
   cardData,
   currentUserId,
@@ -19,9 +32,7 @@ export const createCardElement = (
 
   likeCount.textContent = cardData.likes.length;
 
-  const isLiked = cardData.likes.some((user) => user._id === currentUserId);
-
-  if (isLiked) {
+  if (cardData.likes.some((user) => user._id === currentUserId)) {
     likeButton.classList.add("card__like-button_is-active");
   }
 

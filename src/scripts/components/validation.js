@@ -26,8 +26,17 @@ const hideInputError = (formElement, inputElement, validationConfig) => {
 };
 
 const checkInputValidity = (formElement, inputElement, validationConfig) => {
-  if (inputElement.validity.patternMismatch) {
-    inputElement.setCustomValidity(inputElement.dataset.errorMessage);
+  const nameRegex = /^[А-Яа-яЁёA-Za-z]+([ -][А-Яа-яЁёA-Za-z]+)*$/;
+
+  if (
+    inputElement.classList.contains("popup__input_type_name") ||
+    inputElement.classList.contains("popup__input_type_card-name")
+  ) {
+    if (!nameRegex.test(inputElement.value)) {
+      inputElement.setCustomValidity(inputElement.dataset.errorMessage);
+    } else {
+      inputElement.setCustomValidity("");
+    }
   } else {
     inputElement.setCustomValidity("");
   }
