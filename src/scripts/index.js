@@ -1,4 +1,3 @@
-import "../pages/index.css";
 
 import {
   enableValidation,
