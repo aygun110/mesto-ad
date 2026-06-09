@@ -1,14 +1,23 @@
+import "../pages/index.css";
+
 import {
   enableValidation,
   clearValidation,
 } from "./components/validation.js";
 
-import { createCardElement } from "./components/card.js";
+import {
+  createCardElement,
+  deleteCardElement,
+  isCardLiked,
+  updateLikeView,
+} from "./components/card.js";
+
 import {
   openModalWindow,
   closeModalWindow,
   setCloseModalWindowEventListeners,
 } from "./components/modal.js";
+
 import {
   getUserInfo,
   getCardList,
@@ -152,7 +161,7 @@ const handleLogoClick = () => {
 const handleDeleteCard = (cardId, cardElement) => {
   removeCard(cardId)
     .then(() => {
-      cardElement.remove();
+      deleteCardElement(cardElement);
     })
     .catch((err) => {
       console.log(err);
@@ -160,12 +169,9 @@ const handleDeleteCard = (cardId, cardElement) => {
 };
 
 const handleLikeCard = (cardId, likeButton, likeCount) => {
-  const isLiked = likeButton.classList.contains("card__like-button_is-active");
-
-  changeLikeCardStatus(cardId, isLiked)
+  changeLikeCardStatus(cardId, isCardLiked(likeButton))
     .then((updatedCard) => {
-      likeButton.classList.toggle("card__like-button_is-active");
-      likeCount.textContent = updatedCard.likes.length;
+      updateLikeView(updatedCard, likeButton, likeCount);
     })
     .catch((err) => {
       console.log(err);
@@ -215,7 +221,6 @@ const handleAvatarFormSubmit = (evt) => {
     .then((userData) => {
       profileAvatar.style.backgroundImage = `url(${userData.avatar})`;
       closeModalWindow(avatarFormModalWindow);
-      avatarForm.reset();
     })
     .catch((err) => {
       console.log(err);
@@ -238,7 +243,6 @@ const handleCardFormSubmit = (evt) => {
     .then((cardData) => {
       renderCard(cardData, "prepend");
       closeModalWindow(cardFormModalWindow);
-      cardForm.reset();
     })
     .catch((err) => {
       console.log(err);
@@ -289,6 +293,7 @@ Promise.all([getUserInfo(), getCardList()])
   });
 
 const allPopups = document.querySelectorAll(".popup");
+
 allPopups.forEach((popup) => {
   setCloseModalWindowEventListeners(popup);
 });
